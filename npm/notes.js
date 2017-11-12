@@ -1,11 +1,18 @@
-console.log('starting notes.js');
-// console.log(module);
-//module.exports.age = 23;
-//function, arrow function
-module.exports.addNote=()=>{
-  console.log('addNote');
-  return 'new note';
+var addNote=(title, body)=>{
+  console.log('adding note ',title,body);
+};
+var listAll=()=>{
+  console.log('Listing all notes');
 }
-module.exports.addInts=(a, b)=>{//adds two numbers
-  return `${a} + ${b} = ${a+b}`;
+var getNote=(title)=>{
+  console.log('Getting ', title);
 }
+var removeNote=(title)=>{
+  console.log('Removing ',title);
+}
+module.exports={
+  addNote,
+  listAll,
+  getNote,
+  removeNote
+};
