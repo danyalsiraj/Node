@@ -1,33 +1,54 @@
-const fs=require('fs');
-const _= require('lodash');
-const yargs=require('yargs');
+const fs = require('fs');
+const _ = require('lodash');
+const yargs = require('yargs');
 
-const notes=require('./notes.js');
+const notes = require('./notes.js');
 
-const argv=yargs.argv;
+const argv = yargs.argv;
 
 // var command=process.argv[2];// fetches th user input from command line at argument 3, arg1 is node, arg 2 is the file name
-var command=argv._[0];//does the same as above satement
-console.log('Command is ',command);
+var command = argv._[0]; //does the same as above satement
+console.log('Command is ', command);
 //console.log('process: ', process.argv);
-console.log('yargs: ', argv);
+//console.log('yargs: ', argv);
 
-if (command==='add'){
+if (command === 'add') {
   //console.log('Adding Note');
-notes.addNote(argv.title,argv.body); //takes in the title of note and description and creates a note
-}
-else if(command==='list'){
+  var note = notes.addNote(argv.title, argv.body); //takes in the title of note and description and creates a note
+  if (note !== null) {
+    console.log('Note created');
+    notes.printNotes(note);
+
+  } else {
+    console.log('Note already exists');
+  }
+
+} else if (command === 'list') {
   //console.log('Listing notes');
-  notes.listAll();
-}
-else if(command==='read'){
+  var allNotes = notes.listAll();
+  console.log(`You have ${allNotes.length} note(s)`);
+  for (var i = 0; i < allNotes.length; i++) {
+    notes.printNotes(allNotes[i]);
+  }
+} else if (command === 'getnote') {
   //console.log('reading notes');
-  notes.getNote(argv.title);
-}
-else if (command==='remove'){
+  var noteSearched = notes.getNote(argv.title);
+  console.log(noteSearched);
+  if (note !== null) {
+    notes.printNotes(noteSearched);
+  } else {
+    console.log('There are no notes with this title');
+  }
+} else if (command === 'remove') {
   //console.log('Removing notes');
-  notes.removeNote(argv.title);
-}
-else {
+  var removedNote = notes.removeNote(argv.title);
+  if (removedNote) {
+    console.log('--');
+    console.log('Following note has been removed');
+    notes.printNotes(removedNote);
+  } else {
+    console.log('There are no notes with this title');
+  }
+} else {
   console.log('enter a valid command');
 }
