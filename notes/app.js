@@ -4,7 +4,31 @@ const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-const argv = yargs.argv;
+//const argv = yargs.argv;// we modify it below to check for conditions
+const titleOption = {
+  describe: 'Title of Note', //what title is
+  demand: true, //if its required
+  alias: 't' //so the user does not have to type ttle everytime
+}
+const bodyOption = {
+  describe: 'Enter the Note',
+  demand: false,
+  alias: 'b'
+}
+const argv = yargs
+  .command('add', 'Add a new note', {
+    title: titleOption,
+    body: bodyOption
+  })
+  .command('list', 'List all Notes')
+  .command('read', 'Read Note', {
+    title: titleOption
+  })
+  .command('remove', 'Remove Note', {
+    title: titleOption
+  })
+  .help() //just prints out all the available functions
+  .argv
 
 // var command=process.argv[2];// fetches th user input from command line at argument 3, arg1 is node, arg 2 is the file name
 var command = argv._[0]; //does the same as above satement
