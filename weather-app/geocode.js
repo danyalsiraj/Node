@@ -1,6 +1,6 @@
 const request = require('request');
 
-var geocodeAddress = (address) => {
+var geocodeAddress = (address, callback) => {
   var encodedAdress = encodeURIComponent(address); //encodes the address string(the spaces in the string)
   //to decode use decodeURIComponent
   console.log(encodedAdress);
@@ -15,13 +15,15 @@ var geocodeAddress = (address) => {
     //console.log(JSON.stringify(error, undefined, 2));
     //from response we can find out where address is stored
     if (error) { //check if there is an error
-      console.log('Unable to connect to server');
+      callback('Unable to connect to server');
     } else if (body.status === 'ZERO_RESULTS') {
-      console.log('Invalid Address');
+      callback('Invalid Address');
     } else if (body.status === 'OK') {
-      console.log(`Address: ${body.results[0].formatted_address}`); //address is the first element of result array
-      console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
-      console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
+      callback(undefined, {
+        address: body.results[0].formatted_address,
+        latitude: body.results[0].geometry.location.lat,
+        longitude: body.results[0].geometry.location.lng
+      });
     }
   });
 }
