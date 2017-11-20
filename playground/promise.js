@@ -23,8 +23,24 @@ var asyncAdd = (a, b) => {
   });
 };
 
+// asyncAdd(5, 2).then((sum) => {
+//   console.log('Result: ', sum);
+//   return asyncAdd(sum, 33);
+// }, (errorMessage) => {
+//   console.log(errorMessage);
+// }).then((sum) => {
+//   console.log('result: ', sum);
+// }, (errorMessage) => {
+//   console.log(errorMessage);
+// });
+
+//the above can still calls the second then even if the first one is rejected
+//to fix that we need to use catch, see below
 asyncAdd(5, 2).then((sum) => {
   console.log('Result: ', sum);
-}, (errorMessage) => {
+  return asyncAdd(sum, 33);
+}).then((sum) => {
+  console.log('result: ', sum);
+}).catch((errorMessage) => {
   console.log(errorMessage);
 });
