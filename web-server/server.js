@@ -2,6 +2,9 @@ const express = require('express');
 
 var app = express();
 
+app.use(express.static(__dirname + '/public')); //to use the static directory. this uses the htmll page in public directory
+//static directory can be used to add js, html, css...
+
 //request containas headers, body information...
 //response contains what to send back for the http request
 app.get('/', (request, response) => {
@@ -26,4 +29,6 @@ app.get('/bad', (request, response) => {
   })
 })
 
-app.listen(3000); //listens to the port
+app.listen(3000, () => {
+  console.log('Server is up on port 3000!');
+}); //listens to the port
