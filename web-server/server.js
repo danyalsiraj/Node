@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs'); //wecan pass in data into an html file using this, this allows us to create templates instead of rendering every page seperately
 
 var app = express();
+
+hbs.registerPartials(__dirname + '/views/partials'); // this allows us to refractor the areas that are same on every page i.e. footers
 app.set('view engine', 'hbs'); //this is a key value pair it tells express what to use
 app.use(express.static(__dirname + '/public')); //to use the static directory. this uses the htmll page in public directory
 //static directory can be used to add js, html, css...

@@ -9,13 +9,15 @@
 </head>
 
 <body>
-  <h1>{{pageTitle}}</h1><!--we pass in the page title-->
+  {{>header}}<!--this takes the footer from partials folder-->
   <p>information here
     <a href="http://localhost:3000/about">click for more information</a>
   </p>
-  <footer>
+<!--  <footer>
     <p>Copyright {{currentYear}}</p>
   </footer>
+-->
+{{>footer}}<!--this takes the footer from partials folder-->
 </body>
 
 </html>

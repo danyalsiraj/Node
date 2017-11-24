@@ -11,9 +11,8 @@
 <body>
   <h1>{{pageTitle}}</h1><!--we pass in the page title-->
   <p>{{welcomeMessage}}</p>
-  <footer>
-    <p>Copyright {{currentYear}}</p>
-  </footer>
+  {{>footer}}<!--this takes the footer from partials folder-->
+
 </body>
 
 </html>
