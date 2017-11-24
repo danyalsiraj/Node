@@ -9,8 +9,9 @@
 </head>
 
 <body>
-  <h1>{{pageTitle}}</h1><!--we pass in the page title-->
+  {{>header}}<!--this takes the header from partials folder-->
   <p>{{welcomeMessage}}</p>
+  <p>{{screamIt welcomeMessage}}</p>
   {{>footer}}<!--this takes the footer from partials folder-->
 
 </body>

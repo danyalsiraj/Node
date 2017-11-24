@@ -8,6 +8,13 @@ app.set('view engine', 'hbs'); //this is a key value pair it tells express what 
 app.use(express.static(__dirname + '/public')); //to use the static directory. this uses the htmll page in public directory
 //static directory can be used to add js, html, css...
 
+hbs.registerHelper('getCurrentYear', () => {
+  return new Date().getFullYear()
+});
+hbs.registerHelper('screamIt', (text) => { //this converts the text to uppercase. example in home page
+  return text.toUpperCase();
+});
+
 //request containas headers, body information...
 //response contains what to send back for the http request
 app.get('/', (request, response) => {
@@ -19,7 +26,7 @@ app.get('/', (request, response) => {
   // });
   response.render('home.hbs', {
     pageTitle: 'Home Page',
-    currentYear: new Date().getFullYear(),
+    //  currentYear: new Date().getFullYear(),//we created get current year helper
     welcomeMessage: 'welcome to my page'
   })
 });
@@ -30,7 +37,6 @@ app.get('/about', (request, response) => {
   //response.send('About Page');
   response.render('about.hbs', { //we pass in the information to display
     pageTitle: 'About page',
-    currentYear: new Date().getFullYear() //gets the current year
   });
 })
 
