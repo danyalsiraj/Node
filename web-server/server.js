@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs'); //wecan pass in data into an html file using this, this allows us to create templates instead of rendering every page seperately
 const fs = require('fs');
 
+const port = process.env.PORT || 3000; // heroku sets a custom port every time, this uses 3000 if no other port is set
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials'); // this allows us to refractor the areas that are same on every page i.e. footers
@@ -69,6 +70,6 @@ app.get('/bad', (request, response) => {
   })
 })
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000!');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}!`);
 }); //listens to the port
