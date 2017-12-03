@@ -14,6 +14,12 @@ it('should add two numbers', () => {
   //   throw new Error(`expected 25, actual ${result}`)
   // }
 });
+it('add two numbers (asyncAdd)', (done) => { //the test passes even before it hits the expect, to fix that we need to add done
+  utils.asyncAdd(10, 15, (sum) => {
+    expect(sum).toBe(25).toBeA('number');
+    done();
+  });
+});
 
 it('should square the number', () => {
   var result = utils.square(5);
@@ -23,7 +29,12 @@ it('should square the number', () => {
   //   throw new Error(`expected 25, actual ${result}`);
   // }
 });
-
+it('should square the number (asyncSquare)', (done) => {
+  utils.asyncSquare(5, (square) => {
+    expect(square).toBe(25).toBeA('number');
+    done();
+  });
+});
 it('should expect some values', () => {
   expect(12).toNotBe(11);
   expect({
